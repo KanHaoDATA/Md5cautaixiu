@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soi Cầu Tài Xỉu MD5</title>
+  <style>
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #00ff00; }
+      50% { box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; }
+      100% { box-shadow: 0 0 10px #00ff00; }
+    }body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #111;
+  border: 3px solid #00ff00;
+  border-radius: 24px;
+  padding: 30px 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: glow 2s infinite ease-in-out;
+}
+
+h1 {
+  font-size: 28px;
+  color: #00ffcc;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: none;
+  outline: none;
+}
+
+input {
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+button {
+  background: linear-gradient(90deg, #00cc00, #00ff00);
+  color: #00ff00;
+  font-weight: bold;
+  cursor: pointer;
+  animation: glow 1.5s infinite;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.result {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #00ff00;
+}
+
+.dice {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.die {
+  width: 70px;
+  height: 70px;
+  background: radial-gradient(circle, #eaffea, #c1ffc1);
+  color: #006600;
+  font-size: 36px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #00ff00, inset 0 0 10px #00cc00;
+  border: 2px solid #00cc00;
+}
+
+.history {
+  margin-top: 30px;
+  color: #ccc;
+  font-size: 14px;
+  text-align: left;
+}
+
+.history h3 {
+  margin-bottom: 10px;
+  color: #00ffcc;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>@KanHaoDATA</h1>
+    <input type="text" id="md5" placeholder="Nhập chuỗi MD5 để phân tích...">
+    <button onclick="analyze()">Phân Tích</button>
+    <div class="result" id="output">...</div>
+    <div class="dice" id="dice"></div>
+    <div class="history" id="history"></div>
+  </div>  <script>
+    const historyData = [];
+
+    function analyze() {
+      const md5 = document.getElementById('md5').value.trim().toLowerCase();
+      const output = document.getElementById('output');
+      const diceEl = document.getElementById('dice');
+      const historyEl = document.getElementById('history');
+
+      if (!/^[a-f0-9]{32}$/.test(md5)) {
+        output.innerText = 'Chuỗi MD5 không hợp lệ!';
+        diceEl.innerHTML = '';
+        return;
+      }
+
+      const nums = [
+        parseInt(md5.slice(0, 2), 16) % 6 + 1,
+        parseInt(md5.slice(2, 4), 16) % 6 + 1,
+        parseInt(md5.slice(4, 6), 16) % 6 + 1,
+      ];
+      const total = nums.reduce((a, b) => a + b, 0);
+      const result = total > 10 ? 'TÀI' : 'XỈU';
+
+      output.innerText = ` ${result}`;
+      diceEl.innerHTML = nums.map(n => `<div class="die">${n}</div>`).join('');
+    }
+  </script></body>
+</html>
